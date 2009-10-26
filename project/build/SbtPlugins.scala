@@ -1,9 +1,10 @@
 import sbt._
 
 class SbtPluginProject(info:ProjectInfo) extends PluginProject(info) {
-	override def managedStyle = ManagedStyle.Ivy
-	val publishTo = Resolver.sftp("Bryan J Swift","repos.bryanjswift.com",3748,"ivy2/")
-	Credentials(Path.userHome / ".ivy2" / ".credentials", log)
+	// Publish settings
+	override def managedStyle = ManagedStyle.Maven
+	val publishTo = Resolver.sftp("Bryan J Swift","repos.bryanjswift.com",3748,"/var/www/vhosts/repos.bryanjswift.com/public/maven2/")
+	// Also package sources and docs
 	override def packageDocsJar = defaultJarPath("-javadoc.jar")
 	override def packageSrcJar= defaultJarPath("-sources.jar")
 	val sourceArtifact = Artifact(artifactID, "src", "jar", Some("sources"), Nil, None)
