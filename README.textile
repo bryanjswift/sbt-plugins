@@ -1,0 +1,27 @@
+h1. sbt-plugins
+
+sbt-plugins represents a couple of pieces of functionality I found common in a couple Simple Build Tool (sbt) projects and extracted into plugins.
+
+h2. bjs.webapp.CleanWebappPlugin
+
+* Adds def webappClassesDirectory -- default is (webappPath / "WEB-INF" / "classes")
+* Adds def webappLibDirectory -- default is (webappPath / "WEB-INF" / "lib")
+* Adds clean-webapp task which deletes everything under webappClassesDirectory and all .jar files under webappLibDirectory
+
+h2. bjs.jackrabbit.CleanRepositoryPlugin
+
+* Adds def repositoryPath -- default is ("." / "repository")
+* Adds clean-repository task which deletes repository directory and everything under it
+
+h2. bjs.io.DeleteDirectoryPlugin
+
+* Adds method to recursively delete a directory (def deleteDirectory)
+
+h2. bjs.io.LessCompilerPlugin
+
+* Adds optional less.compiler property which provides the command used to invoke the less compiler -- default is "lessc"
+* Adds def lessFiles -- default is (webappPath ** "*.less")
+* Adds less-compile task which compiles the .less files to .css files
+* Overrides webappResources to remove lessFiles from the PathFinder
+* Overrides prepareWebappAction to depend on less-compile task
+
