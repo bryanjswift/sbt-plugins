@@ -25,3 +25,18 @@ h2. bjs.io.LessCompilerPlugin
 * Overrides webappResources to remove lessFiles from the PathFinder
 * Overrides prepareWebappAction to depend on less-compile task
 
+h2. bjs.project.ResolverPlugin
+
+* Adds optional resolver.file property which provides path to publish resolver information -- default is ".resolver"
+* Adds a private def sbtPublishResolver which applies resolver information in resolver.file
+* Adds publishTo val used for publishing based on result of sbtPublishResolver
+
+h3. Sample .resolver file
+
+<pre><code>
+	resolver.name=Example Resolver
+	resolver.host=example.com
+	resolver.port=22
+	resolver.path=/path/to/publish/into/
+	resolver.type=sftp|ssh
+</code></pre>
