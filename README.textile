@@ -39,4 +39,5 @@ h3. Sample .resolver file
 	resolver.port=22
 	resolver.path=/path/to/publish/into/
 	resolver.type=sftp|ssh
+	
 </code></pre>
