@@ -1,0 +1,5 @@
+resolver.name=Example Resolver
+resolver.host=example.com
+resolver.port=22
+resolver.path=/path/to/publish/into/
+resolver.type=sftp|ssh
