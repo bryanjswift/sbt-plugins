@@ -16,7 +16,7 @@ trait ResolverPlugin extends BasicManagedProject {
 			props.load(new FileInputStream(resolverPath.value))
 		} catch {
 			case ioe:IOException => log.error(String.format("Resolver configuration could not be found at '%s'. You will not be able to publish without this file.",resolverPath.value))
-			case iae:IllegalArgumentException => log.error(String.format("Resolver configuration could not be found at '%s'. You will not be able to publish without this file.",resolverPath.value))
+			case iae:IllegalArgumentException => log.error(String.format("Resolver configuration contains illegal characters at '%s'. You will not be able to publish without a properly formatted file.",resolverPath.value))
 		}
 		props("resolver.type") match {
 			case "sftp" =>
@@ -31,8 +31,8 @@ trait ResolverPlugin extends BasicManagedProject {
 					props("resolver.host"),
 					props("resolver.port").toInt,
 					props("resolver.path"))
-			case s =>
-				log.warn(String.format("Unknown resolver type %s"))
+			case _ =>
+				log.error(String.format("Resolver type could not be determined"))
 		}
 	}
 	val publishTo = sbtPublishResolver
