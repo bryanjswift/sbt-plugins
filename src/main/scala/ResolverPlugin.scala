@@ -5,7 +5,7 @@ import sbt._
 
 trait ResolverPlugin extends BasicManagedProject {
 	val resolverPath = propertyOptional[String](".resolver")
-	private def sbtPublishResolver = {
+	val publishTo = {
 		import java.io.FileInputStream
 		import java.util.Properties
 		val props = new Properties() {
@@ -31,9 +31,6 @@ trait ResolverPlugin extends BasicManagedProject {
 					props("resolver.host"),
 					props("resolver.port").toInt,
 					props("resolver.path"))
-			case _ =>
-				log.error(String.format("Resolver type could not be determined"))
 		}
 	}
-	val publishTo = sbtPublishResolver
 }
